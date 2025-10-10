@@ -1,0 +1,15 @@
+RewriteEngine On
+
+# Если запрашиваемый файл или папка существует, то отдаем их напрямую
+RewriteCond %{REQUEST_FILENAME} -f [OR]
+RewriteCond %{REQUEST_FILENAME} -d
+RewriteRule ^ - [L]
+
+# Иначе перенаправляем все запросы на index.php
+RewriteRule ^ index.php [L]
+
+# Запретить прямой доступ ко всем PHP-файлам, кроме index.php
+<FilesMatch "^(?!index\.php$).+\.php$">
+    Order deny,allow
+    Deny from all
+</FilesMatch>
