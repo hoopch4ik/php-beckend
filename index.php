@@ -4,6 +4,7 @@ require __DIR__ . '/vendor/autoload.php';
 
 use App\Handlers\HttpHandler;
 use App\Handlers\Logger;
+use App\Handlers\BaseRouter;
 use App\Config\ConfigWeb;
 use App\Handlers\Router;
 use App\Api\V1\Router\Router as RouterV1;
