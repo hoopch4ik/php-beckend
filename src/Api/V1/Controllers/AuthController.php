@@ -41,13 +41,15 @@ class AuthController {
             // "updated_at"->$user->updated_at
         ]);
 
-        new ApiResponse(
-            200,
-            true,
-            "Аутентификация прошла успешно!",
-            [
-                "bearer"=>$bearer
-            ]
+        HttpHandler::$response->setFinish(
+            new ApiResponse(
+                200,
+                true,
+                "Аутентификация прошла успешно!",
+                [
+                    "bearer"=>$bearer
+                ]
+            )
         );
     }
 
@@ -105,10 +107,12 @@ class AuthController {
             );
         }
 
-        new ApiResponse(
-            200,
-            true,
-            "Учётная запись создана!",
+        HttpHandler::$response->setFinish(
+            new ApiResponse(
+                200,
+                true,
+                "Учётная запись создана!",
+            )
         );
     }
 

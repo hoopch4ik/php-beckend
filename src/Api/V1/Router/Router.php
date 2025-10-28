@@ -18,7 +18,7 @@ class Router extends BaseRouter {
         parent::post(ConfigRoutes::AUTH_LOGIN)
         ->controller("App\\Forms\\LoginForm@check")
         ->controller("AuthController@login");
-        parent::post(ConfigRoutes::AUTH_LOGIN)
+        parent::post(ConfigRoutes::AUTH_REGISTER)
         ->controller("App\\Forms\\RegisterForm@check")
         ->controller("AuthController@register");
 

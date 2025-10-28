@@ -6,13 +6,14 @@ use App\Config\ConfigWeb;
 
 
 class Response {
-	public readonly bool $finished;
+	public bool $finished;
 	protected ApiResponse|null $res;
 
 	public function __construct() {
 		$this->finished = false;
 		$this->res = null;
 
+		header("Content-Type: application/json;");
 		$this->handleOrigins();
 		$this->handleMethods();
 	}

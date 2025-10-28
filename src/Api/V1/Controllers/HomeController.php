@@ -8,7 +8,7 @@ use App\Handlers\HttpHandler;
 class HomeController {
 
     public static function healthCheck() {
-        HttpHandler::$response->setFinished(
+        HttpHandler::$response->setFinish(
             new ApiResponse(
                 200,
                 true,
@@ -18,7 +18,7 @@ class HomeController {
     }
 
     public static function isAuthHandler() {
-        HttpHandler::$response->setFinished(
+        HttpHandler::$response->setFinish(
             new ApiResponse(
                 200,
                 true,
