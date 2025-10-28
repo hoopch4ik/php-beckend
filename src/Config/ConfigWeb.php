@@ -9,7 +9,7 @@ class ConfigWeb {
 
     public const SITE_NAME = "";
     public const SITE_DESCRIPTION = "";
-    public const SITE_DOMAIN = "http://backend";
+    public const SITE_DOMAIN = "http://test.php";
     public const ORIGINS = [
         "http://frontend",
     ];
