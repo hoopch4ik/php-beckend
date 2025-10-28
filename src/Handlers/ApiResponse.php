@@ -1,6 +1,8 @@
 <?php
 namespace App\Handlers;
 
+use App\Handlers\Logger;
+
 
 class ApiResponse {
     public int $code;
@@ -20,8 +22,9 @@ class ApiResponse {
         $this->message = $message;
         $this->data = $data;
         
+        Logger::endpoint();
+
         http_response_code($code);
-        
         echo json_encode([
             "code"=>$this->code,
             "success"=>$this->success,

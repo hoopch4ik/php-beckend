@@ -2,13 +2,14 @@
 namespace App\Handlers\JwtHandlers;
 
 use App\Utils\MyJwt;
+use App\Interfaces\Base\IUserRole;
 use stdClass;
 
 
-class AuthJWT {
+class CreatorJWT {
 
-    public static function generate(array $data): string {
-        return MyJwt::encode($data, 60*24);
+    public static function generate(): string {
+        return MyJwt::encode(["role"=>IUserRole::CREATOR], null);
     }
 
     public static function check(string $bearer): array|stdClass {
