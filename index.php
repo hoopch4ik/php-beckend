@@ -16,7 +16,7 @@ use Protected\Cache\BaseCache;
 use Protected\Cache\SimpleCache;
 
 // (new SimpleCache())->handleRequest();
-new BaseCache();
+// new BaseCache();
 
 
 
