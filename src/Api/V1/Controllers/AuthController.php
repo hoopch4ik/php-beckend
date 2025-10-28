@@ -1,45 +1,27 @@
 <?php
 namespace App\Api\V1\Controllers;
 
-use App\Forms\LoginForm;
-use App\Forms\RegisterForm;
 use App\Handlers\ApiResponse;
+use App\Handlers\HttpHandler;
 use App\Handlers\JwtHandlers\AuthJWT;
 use App\Interfaces\Base\IUserRole;
-use App\Middlewares\HttpMiddleware;
 use App\Models\UserModel;
 
 
 
-class AuthControllerV1 {
+class AuthController {
 
     public static function login() {
-        $body = HttpMiddleware::$request->body;
+        $body = HttpHandler::$request->body;
 
-        $email = $body["email"] ?? "";
-        $password = $body["password"] ?? "";
+        $email = $body["email"];
+        $password = $body["password"];
 
-        $loginForm = new LoginForm(
-            $email,
-            $password,
-        );
-        if (
-            !$loginForm->isValidate() ||
-            !$loginForm->load()
-        ) {
-            return new ApiResponse(
-                400,
-                false,
-                $loginForm->message
-            );
-        }
-
-
-        $user = UserModel::getbyEmail($loginForm->email);
+        $user = UserModel::getbyEmail($email);
 
         if (
             !$user ||
-            !UserModel::isCorrectPasswords($loginForm->password, $user->password_hash)
+            !UserModel::isCorrectPasswords($password, $user->password_hash)
         ) {
             new ApiResponse(
                 400,
@@ -70,12 +52,12 @@ class AuthControllerV1 {
     }
 
     public static function register() {
-        $body = HttpMiddleware::$request->body;
+        $body = HttpHandler::$request->body;
         
-        $nice_name = $body["nice_name"] ?? "";
-        $email = $body["email"] ?? "";
-        $password = $body["password"] ?? "";
-        $password_repeat = $body["password_repeat"] ?? "";
+        $nice_name = $body["nice_name"];
+        $email = $body["email"];
+        $password = $body["password"];
+        $password_repeat = $body["password_repeat"];
         $image_url = null; // Proccess upload file, get link and save
 
 

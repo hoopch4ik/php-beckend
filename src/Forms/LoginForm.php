@@ -1,30 +1,27 @@
 <?php
 namespace App\Forms;
 
+use App\Handlers\ApiResponse;
+use App\Handlers\HttpHandler;
+
 
 class LoginForm {
-    public string $email;
-    public string $password;
-
 
     protected string|null $_email;
     protected string|null $_password;
 
 
-    public string $message;
-
-    public function __construct(
-        string|null $email,
-        string|null $password,
-    ) {
-        $this->_email = $email;
-        $this->_password = $password;
+    public function __construct(array $args) {
+        $this->_email = $args['email'] ?? null;
+        $this->_password = $args['password'] ?? null;
     }
 
 
     public function load() {
-        $this->email = $this->_email;
-        $this->password = $this->_password;
+        HttpHandler::$request->body['email'] = $this->_email;
+        HttpHandler::$request->body['password'] = $this->_password;
+
+        return true;
     }
 
 
@@ -41,7 +38,7 @@ class LoginForm {
             strlen($this->_email) < 4 ||
             strlen($this->_password) < 4
         ) {
-            $this->message = "Длина некоторых полей содержит менее 4 символов";
+            $this->message = "Длина некоторых полей содержит менее 4 символов!";
             return false;
         }
 

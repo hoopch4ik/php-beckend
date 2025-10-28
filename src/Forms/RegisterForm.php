@@ -3,12 +3,6 @@ namespace App\Forms;
 
 
 class RegisterForm {
-    public string $nice_name;
-    public string $email;
-    public string $password;
-    public string $password_repeat;
-
-
 
     protected string|null $_nice_name;
     protected string|null $_email;
@@ -19,24 +13,21 @@ class RegisterForm {
     public string $message;
     
 
-    public function __construct(
-        string|null $nice_name,
-        string|null $email,
-        string|null $password,
-        string|null $password_repeat,
-    ) {
-        $this->_nice_name = $nice_name;
-        $this->_email = $email;
-        $this->_password = $password;
-        $this->_password_repeat = $password_repeat;
+    public function __construct(array $args) {
+        $this->_nice_name = $args['nice_name'] ?? null;
+        $this->_email = $args['email'] ?? null;
+        $this->_password = $args['password'] ?? null;
+        $this->_password_repeat = $args['password_repeat'] ?? null;
     }
 
 
     public function load() {
-        $this->nice_name = $this->_nice_name;
-        $this->email = $this->_email;
-        $this->password = $this->_password;
-        $this->password_repeat = $this->_password_repeat;
+        HttpHandler::$request->body['nice_name'] = $this->_nice_name;
+        HttpHandler::$request->body['email'] = $this->_email;
+        HttpHandler::$request->body['password'] = $this->_password;
+        HttpHandler::$request->body['password_repeat'] = $this->_password_repeat;
+
+        return true;
     }
 
 

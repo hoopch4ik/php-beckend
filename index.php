@@ -1,18 +1,29 @@
 <?php
-session_start();
 require __DIR__ . '/vendor/autoload.php';
 
 
-use App\Api\V1\Routes\RouterV1;
+use App\Handlers\HttpHandler;
+use App\Handlers\Logger;
+use App\Config\ConfigWeb;
+use App\Handlers\Router;
+use App\Api\V1\Router\Router as RouterV1;
+
+Dotenv\Dotenv::createImmutable(__DIR__)->load();
 
 
-use App\Middlewares\HttpMiddleware;
+use Protected\Cache\BaseCache;
+use Protected\Cache\SimpleCache;
+
+// (new SimpleCache())->handleRequest();
+new BaseCache();
 
 
-// IncludeStyles::setStaticStyles([
-    // '/assets/styles/main.css',
-// ]);
+
+new HttpHandler();
+new Logger();
+
+BaseRouter::globalDispatch([
+    new RouterV1()
+]);
 
 
-new HttpMiddleware();
-new RouterV1("/api/v1");
