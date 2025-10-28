@@ -2,7 +2,7 @@
 namespace App\Forms;
 
 
-class RegisterForm {
+class RegisterForm extends Form {
 
     protected string|null $_nice_name;
     protected string|null $_email;

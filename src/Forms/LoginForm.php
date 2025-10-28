@@ -5,7 +5,7 @@ use App\Handlers\ApiResponse;
 use App\Handlers\HttpHandler;
 
 
-class LoginForm {
+class LoginForm extends Form {
 
     protected string|null $_email;
     protected string|null $_password;
